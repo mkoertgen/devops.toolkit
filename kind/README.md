@@ -1,6 +1,8 @@
 # Kind
 
-Works better with nip.io than e.g. minikube (especially on Windows)
+[Kind](https://kind.sigs.k8s.io/) works better with [nip.io](https://nip.io/) than e.g. [minikube](https://minikube.sigs.k8s.io/), especially on [Docker Desktop (Windows)](https://docs.docker.com/desktop/).
+
+## Create a cluster
 
 ```shell
 # Install Docker Desktop & Kind
@@ -27,4 +29,12 @@ You can now use your cluster with:
 kubectl cluster-info --context kind-walkthrough
 
 Have a question, bug, or feature request? Let us know! https://kind.sigs.k8s.io/#community �
+```
+
+## Cleanup
+
+To [clean everything up](https://github.com/tektoncd/dashboard/blob/main/docs/walkthrough/walkthrough-kind.md#cleaning-up), run the following command:
+
+```shell
+kind delete cluster --name walkthrough
 ```

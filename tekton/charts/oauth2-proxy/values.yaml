@@ -1,13 +1,43 @@
 # Tekton katacoda scneario: https://github.com/tektoncd/dashboard/blob/main/docs/walkthrough/walkthrough-oauth2-proxy.md
 # oauth2-proxy values reference: https://github.com/oauth2-proxy/manifests/blob/main/helm/oauth2-proxy/values.yaml
+
+# Oauth client configuration specifics
 config:
-  # clientID: $CLIENT_ID
-  # clientSecret: $CLIENT_SECRET
-  clientID: b48bf8cbf3fd0aa0b586
-  clientSecret: e3130e56259803ffade157f3b1f0e0e77a96f917
+  #--- GitHub ---
+  # See https://github.com/settings/developers
+  #clientID: xxx
+  #clientSecret: xxx
+
+  # https://github.com/oauth2-proxy/manifests/blob/main/helm/oauth2-proxy/values.yaml#L23
+  # Documentation: https://github.com/oauth2-proxy/oauth2-proxy/blob/master/contrib/oauth2-proxy.cfg.example
+  # configFile: |-
+  #   email_domains = [ "*" ]
+  #   upstreams = [ "file:///dev/null" ]
 
 extraArgs:
-  provider: github
+  # Support for multiple providers is ongoing work, cf.:
+  # - https://github.com/oauth2-proxy/oauth2-proxy/issues/926
+  # -
+  # Meanwhile we might use dexidp for multiple providers
+
+  #--- Google ---
+  # - https://oauth2-proxy.github.io/oauth2-proxy/docs/configuration/oauth_provider/#google-auth-provider
+
+  #--- GitHub ---
+  #provider: github
+
+  #--- Dex (via oidc) ---
+  # https://oauth2-proxy.github.io/oauth2-proxy/docs/configuration/oauth_provider/#dex
+  #provider: oidc
+
+  #--- Azure ---
+  # Azure example (requires https), cf.:
+  # - https://oauth2-proxy.github.io/oauth2-proxy/docs/configuration/oauth_provider/#azure-auth-provider
+  #provider: azure
+  #azure-tenant: <organization/tenant>.onmicrosoft.com
+  #provider-display-name: Organization
+
+  #----------------
   whitelist-domain: .127.0.0.1.nip.io
   cookie-domain: .127.0.0.1.nip.io
   redirect-url: http://auth.127.0.0.1.nip.io/oauth2/callback
