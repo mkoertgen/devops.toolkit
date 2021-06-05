@@ -1,0 +1,20 @@
+# Tekton katacoda scneario: https://github.com/tektoncd/dashboard/blob/main/docs/walkthrough/walkthrough-oauth2-proxy.md
+# oauth2-proxy values reference: https://github.com/oauth2-proxy/manifests/blob/main/helm/oauth2-proxy/values.yaml
+config:
+  # clientID: $CLIENT_ID
+  # clientSecret: $CLIENT_SECRET
+  clientID: b48bf8cbf3fd0aa0b586
+  clientSecret: e3130e56259803ffade157f3b1f0e0e77a96f917
+
+extraArgs:
+  provider: github
+  whitelist-domain: .127.0.0.1.nip.io
+  cookie-domain: .127.0.0.1.nip.io
+  redirect-url: http://auth.127.0.0.1.nip.io/oauth2/callback
+  cookie-secure: "false"
+
+ingress:
+  enabled: true
+  path: /
+  hosts:
+    - auth.127.0.0.1.nip.io
