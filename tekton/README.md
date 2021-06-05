@@ -38,14 +38,7 @@ $ tkn taskrun logs --last -f
 
 ## Dashboard
 
-### Access
-
-```shell
-$ kubectl -n tekton-pipelines port-forward svc/tekton-dashboard 9097:9097
-...
-```
-
-### Oauth2
+### Secured Access via Oauth2
 
 [Secure Tekton dashboard behind Oauth2-Proxy](https://github.com/tektoncd/dashboard/blob/main/docs/walkthrough/walkthrough-oauth2-proxy.md)
 
@@ -79,11 +72,6 @@ Next, install oauth2-proxy using `CLIENT_ID / CLIENT_SECRET`
 #helm repo add oauth2-proxy https://oauth2-proxy.github.io/manifests
 #helm repo update
 
-# # CLIENT_ID and CLIENT_SECRET are the Client ID and Client Secret obtained
-# when creating the GitHub OAuth application in the previous step
-CLIENT_ID=__THE_CLIENT_ID_OF_YOUR_GITHUB_OAUTH_APP__
-CLIENT_SECRET=__THE_CLIENT_SECRET_OF_YOUR_GITHUB_OAUTH_APP__
-
 helm upgrade --install --wait --create-namespace --namespace tools oauth2-proxy oauth2-proxy/oauth2-proxy -f charts/oauth2-proxy/values.yaml
 ```
 
@@ -93,4 +81,6 @@ Add Ingress rule for the Tekton Dashboard
 kubectl apply -n tekton-pipelines -f manifests/tekton/dashboard-ingress.yaml
 ```
 
-and hit [http://tekton-dashboard.127.0.0.1.nip.io/](http://tekton-dashboard.127.0.0.1.nip.io/) to be authenticated and logged in
+and hit [http://tekton-dashboard.127.0.0.1.nip.io/](http://tekton-dashboard.127.0.0.1.nip.io/) to be authenticated and logged in.
+
+**NOTE:** logout url seems quirky to configure. Should be the possible through the deployment but somehow patching does not work.
