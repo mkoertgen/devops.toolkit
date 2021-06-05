@@ -38,30 +38,25 @@ $ tkn taskrun logs --last -f
 
 ## Dashboard
 
-### Secured Access via Oauth2
-
-[Secure Tekton dashboard behind Oauth2-Proxy](https://github.com/tektoncd/dashboard/blob/main/docs/walkthrough/walkthrough-oauth2-proxy.md)
-
 Install ingress controller
 
 ```shell
-# Install nginx-ingress (helm)
-# helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
-# helm repo update
-#helm upgrade --install --wait --create-namespace --namespace ingress-nginx ingress-nginx ingress-nginx/ingress-nginx -f charts/ingress-nginx/values.yaml
-
-# On MiniKube
-# $ minikube addons enable ingress
-#   - Using image k8s.gcr.io/ingress-nginx/controller:v0.44.0
-#   - Using image docker.io/jettech/kube-webhook-certgen:v1.5.1
-#   - Using image docker.io/jettech/kube-webhook-certgen:v1.5.1
-# * Verifying ingress addon...
-# * The 'ingress' addon is enabled
-
-# Bare kubctl manifest, see
-# - https://github.com/tektoncd/dashboard/blob/main/docs/walkthrough/walkthrough-kind.md#installing-nginx-ingress-controller
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-0.32.0/deploy/static/provider/kind/deploy.yaml
 ```
+
+### Unsecured Ingress
+
+Add ingress rule using [nip.io](https://nip.io)
+
+```shell
+kubectl apply -n tekton-pipelines -f manifests/tekton/dashboard-ingress.yaml
+```
+
+and hit [http://tekton-dashboard.127.0.0.1.nip.io/](http://tekton-dashboard.127.0.0.1.nip.io/)
+
+### Secured Access via Oauth2
+
+[Secure Tekton dashboard behind Oauth2-Proxy](https://github.com/tektoncd/dashboard/blob/main/docs/walkthrough/walkthrough-oauth2-proxy.md)
 
 Register an OAuth Application (e.g. as [GitHub Developer App](https://github.com/settings/developers)).
 
@@ -71,14 +66,13 @@ Next, install oauth2-proxy using `CLIENT_ID / CLIENT_SECRET`
 # Updated helm repo: https://artifacthub.io/packages/helm/oauth2-proxy/oauth2-proxy
 #helm repo add oauth2-proxy https://oauth2-proxy.github.io/manifests
 #helm repo update
-
 helm upgrade --install --wait --create-namespace --namespace tools oauth2-proxy oauth2-proxy/oauth2-proxy -f charts/oauth2-proxy/values.yaml
 ```
 
 Add Ingress rule for the Tekton Dashboard
 
 ```shell
-kubectl apply -n tekton-pipelines -f manifests/tekton/dashboard-ingress.yaml
+kubectl apply -n tekton-pipelines -f manifests/tekton/dashboard-ingress-oauth2.yaml
 ```
 
 and hit [http://tekton-dashboard.127.0.0.1.nip.io/](http://tekton-dashboard.127.0.0.1.nip.io/) to be authenticated and logged in.
