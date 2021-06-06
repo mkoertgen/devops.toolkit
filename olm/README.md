@@ -1,6 +1,6 @@
 # Operator Lifecycle Manager (OLM)
 
-> [OLM](<(https://github.com/operator-framework/operator-lifecycle-manager)>) extends Kubernetes to provide a declarative way to install, manage, and upgrade Operators and their dependencies in a cluster. ...
+> [OLM](https://github.com/operator-framework/operator-lifecycle-manager) extends Kubernetes to provide a declarative way to install, manage, and upgrade Operators and their dependencies in a cluster. ...
 
 ## Getting Started
 
@@ -11,6 +11,46 @@ Install OLM operator from GitHub Releases [operator-lifecycle-manager/releases](
 ```shell
 kubectl apply -f https://github.com/operator-framework/operator-lifecycle-manager/releases/download/v0.18.1/crds.yaml
 kubectl apply -f https://github.com/operator-framework/operator-lifecycle-manager/releases/download/v0.18.1/olm.yaml
+```
+
+## Installing Operators using OLM
+
+Example to install the [tektoncd-operator](https://github.com/tektoncd/operator)
+
+```shell
+# Get the operators channels & current cluster source version (csv)
+$ kubectl get packagemanifest/tektoncd-operator -n olm -o=jsonpath="{range .status.channels[*]}{@.name}{'\t'}{@.currentCSV}{'\n'}"
+alpha   tektoncd-operator.v0.23.0-2
+
+# Install directly from operatorhub, https://operatorhub.io/operator/tektoncd-operator
+# This Operator will be installed in the "operators" namespace and will be usable from all namespaces in the cluster.
+$ kubectl create -f https://operatorhub.io/install/tektoncd-operator.yaml
+subscription.operators.coreos.com/my-tektoncd-operator created
+
+# Get subscriptions
+$ kubectl get sub -n operators
+NAME                   PACKAGE             SOURCE                  CHANNEL
+my-tektoncd-operator   tektoncd-operator   operatorhubio-catalog   alpha
+
+# After install, watch your operator come up using next command.
+$ kubectl get csv -n operators
+NAME                          DISPLAY             VERSION    REPLACES   PHASE
+tektoncd-operator.v0.23.0-2   Tektoncd Operator   0.23.0-2              Succeeded
+```
+
+When building images with tekton & kaniko we will need a registry, e.g RedHat's Project [Quay](https://github.com/quay/quay-operator)
+
+```shell
+# https://operatorhub.io/operator/project-quay
+$ kubectl create -f https://operatorhub.io/install/project-quay.yaml
+namespace/my-project-quay created
+operatorgroup.operators.coreos.com/operatorgroup created
+subscription.operators.coreos.com/my-project-quay created
+
+$ kubectl get sub -n my-project-quay
+NAME              PACKAGE        SOURCE                  CHANNEL
+my-project-quay   project-quay   operatorhubio-catalog   stable
+
 ```
 
 ## Available operators

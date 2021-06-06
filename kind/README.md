@@ -31,6 +31,12 @@ kubectl cluster-info --context kind-walkthrough
 Have a question, bug, or feature request? Let us know! https://kind.sigs.k8s.io/#community �
 ```
 
+Install ingress controller
+
+```shell
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/provider/kind/deploy.yaml
+```
+
 ## Cleanup
 
 To [clean everything up](https://github.com/tektoncd/dashboard/blob/main/docs/walkthrough/walkthrough-kind.md#cleaning-up), run the following command:
