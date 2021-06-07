@@ -140,12 +140,14 @@ and hit [http://tekton-dashboard.127.0.0.1.nip.io/](http://tekton-dashboard.127.
 
 **NOTE:** logout url seems quirky to configure. Should be the possible through the deployment but somehow patching does not work.
 
-## Docker Registry (Quay)
+## Docker Registry
 
 When building images with tekton & kaniko we will need a registry, e.g.
 
-- RedHat's Project [Quay](https://github.com/quay/quay-operator) ( requires OpenShift)
+- RedHat's Project [Quay](https://github.com/quay/quay-operator) (requires OpenShift)
 - [twuni/docker-registry](https://artifacthub.io/packages/helm/twuni/docker-registry) (ArtifactHub), [twuni/docker-registry.helm](https://github.com/twuni/docker-registry.helm) (GitHub)
+- MiniKube: [minikube addons enable registry](https://minikube.sigs.k8s.io/docs/handbook/registry/)
+- MicroK8s: [microk8s enable registry](https://microk8s.io/docs/registry-built-in)
 
 ```shell
 # https://operatorhub.io/operator/project-quay
