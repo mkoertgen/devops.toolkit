@@ -89,9 +89,19 @@ $ tkn taskrun logs --last -f
 
 ## Dashboard
 
-Install ingress controller
+Install ingress controller, see [NGINX Ingress Controller - Provider Specific Steps](https://kubernetes.github.io/ingress-nginx/deploy/#provider-specific-steps)
 
 ```shell
+# Docker Desktop
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.47.0/deploy/static/provider/cloud/deploy.yaml
+
+# minikube
+minikube addons enable ingress
+
+# microk8s
+microk8s enable ingress
+
+# kind
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/provider/kind/deploy.yaml
 ```
 
@@ -123,7 +133,7 @@ helm upgrade --install --wait --create-namespace --namespace tools oauth2-proxy 
 Add Ingress rule for the Tekton Dashboard
 
 ```shell
-kubectl apply -n tekton-pipelines -f manifests/tekton/dashboard-ingress-oauth2.yaml
+kubectl apply -n tekton-pipelines -f ./manifests/tekton/dashboard-ingress-oauth2.yaml
 ```
 
 and hit [http://tekton-dashboard.127.0.0.1.nip.io/](http://tekton-dashboard.127.0.0.1.nip.io/) to be authenticated and logged in.
@@ -132,27 +142,23 @@ and hit [http://tekton-dashboard.127.0.0.1.nip.io/](http://tekton-dashboard.127.
 
 ## Docker Registry (Quay)
 
-When building images with tekton & [kaniko](https://github.com/GoogleContainerTools/kaniko) we will need an image registry,
-e.g RedHat's Project [Quay](https://github.com/quay/quay-operator):
+When building images with tekton & kaniko we will need a registry, e.g.
+
+- RedHat's Project [Quay](https://github.com/quay/quay-operator) ( requires OpenShift)
+- [twuni/docker-registry](https://artifacthub.io/packages/helm/twuni/docker-registry) (ArtifactHub), [twuni/docker-registry.helm](https://github.com/twuni/docker-registry.helm) (GitHub)
 
 ```shell
-# Install quay-operator: https://operatorhub.io/operator/project-quay (too old)
-#$ kubectl create -f https://operatorhub.io/install/project-quay.yaml
-#namespace/my-project-quay created
-#operatorgroup.operators.coreos.com/operatorgroup created
-#subscription.operators.coreos.com/my-project-quay created
+# https://operatorhub.io/operator/project-quay
+$ helm repo add twuni https://helm.twun.io
+"twuni" has been added to your repositories
 
-# Review operator subscription is ok
-#$ kubectl get sub -n my-project-quay
-#NAME              PACKAGE        SOURCE                  CHANNEL
-#my-project-quay   project-quay   operatorhubio-catalog   stable
+$ helm repo update
+Hang tight while we grab the latest from your chart repositories...
+...Successfully got an update from the "twuni" chart repository
+...
+Update Complete. ⎈Happy Helming!⎈
 
-#--------------
-# Add the openshift-marketplace catalog source: https://github.com/quay/quay-operator#getting-started
-$ kubectl create -f https://raw.githubusercontent.com/quay/quay-operator/master/bundle/quay-operator.catalogsource.yaml
-catalogsource.operators.coreos.com/quay-operator-tng created
-
-# Use operator from github
-# Install minimal quay registry:
-
+$ helm upgrade --install --wait --create-namespace --namespace tools my-docker-registry twuni/docker-registry -f ./charts/docker-registry/values.yaml
 ```
+
+And hit the registry at [http://registry.127.0.0.1.nip.io/](http://registry.127.0.0.1.nip.io/).
