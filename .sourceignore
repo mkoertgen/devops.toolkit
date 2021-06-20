@@ -1,0 +1,11 @@
+# Flux source ignore, cf.:
+# - https://fluxcd.io/docs/components/source/gitrepositories/#excluding-files
+
+# Exclude all
+/*
+
+# include apps dir
+!/ci-cd/_apps/
+
+# exclude flux-bootstrap
+/ci-cd/_apps/flux-system/**
