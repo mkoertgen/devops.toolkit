@@ -1,0 +1,13 @@
+# https://fluxcd.io/docs/components/source/helmcharts/#spec-examples
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: HelmChart
+metadata:
+  name: redis
+  namespace: redis
+spec:
+  chart: redis
+  version: 14.4.0
+  sourceRef:
+    name: bitnami
+    kind: HelmRepository
+  interval: 5m
