@@ -1,6 +1,6 @@
 # https://fluxcd.io/docs/components/source/helmcharts/#spec-examples
 apiVersion: source.toolkit.fluxcd.io/v1beta1
-kind: HelmChart
+kind: HelmRelease
 metadata:
   name: redis
   namespace: redis
