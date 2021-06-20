@@ -7,3 +7,7 @@ Assessing Cloud Native GitOps approaches
 - [Observability](./observability/README.md) (fluentd/fluent-bit, elastic-stack, prometheus/grafana, opentelemetry/jaeger, ...)
 - [Security](./security/README.md) (opa, kyverno, snyk, ...)
 - Cloud Native [AI](./ai/README.md) (kubeflow, ...)
+
+## References
+
+- YouTube: [Introduction to GitOps](https://www.youtube.com/watch?v=Mr_mbwsRDBI) ([WeaveWorks Inc.](https://www.weave.works/))
