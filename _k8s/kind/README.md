@@ -37,6 +37,22 @@ Install ingress controller
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/provider/kind/deploy.yaml
 ```
 
+## Stop / Restart Cluster
+
+Stopping / restarting a local Kind cluster is [not supported](https://github.com/kubernetes-sigs/kind/issues/831).
+Yet as a workaround you can just pause & resume the respective container
+
+```shell
+# Get Docker container name of Kind
+$ docker ps | grep kindest
+528650083cbc   kindest/node:v1.21.1 ...
+# Stop kind
+$ docker pause 528650083cbc
+528650083cbc
+# Resume again
+$ docker unpause 528650083cbc
+```
+
 ## Cleanup
 
 To [clean everything up](https://github.com/tektoncd/dashboard/blob/main/docs/walkthrough/walkthrough-kind.md#cleaning-up), run the following command:
