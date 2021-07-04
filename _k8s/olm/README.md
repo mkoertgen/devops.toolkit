@@ -9,8 +9,8 @@ See [QuickStart](https://olm.operatorframework.io/docs/getting-started/)
 Install OLM operator from GitHub Releases [operator-lifecycle-manager/releases](https://github.com/operator-framework/operator-lifecycle-manager/releases), e.g.
 
 ```shell
-kubectl apply -f https://github.com/operator-framework/operator-lifecycle-manager/releases/download/v0.18.1/crds.yaml
-kubectl apply -f https://github.com/operator-framework/operator-lifecycle-manager/releases/download/v0.18.1/olm.yaml
+kubectl apply -f https://github.com/operator-framework/operator-lifecycle-manager/releases/download/v0.18.2/crds.yaml
+kubectl apply -f https://github.com/operator-framework/operator-lifecycle-manager/releases/download/v0.18.2/olm.yaml
 ```
 
 ## Installing Operators using OLM

@@ -1,12 +1,12 @@
 # CI/CD
 
-Comparing alternative / complementary kubernetes native gitops approaches
+Comparing alternative / complementary kubernetes native CI/CD & GitOps approaches
 
+- [tekton](https://tekton.dev/) (CI/CD)
+- [argocd](https://argo-cd.readthedocs.io/en/stable/) (GitOps)
+- [fluxcd](https://fluxcd.io/) (GitOps)
+- [kaniko](https://github.com/GoogleContainerTools/kaniko) (k8s native docker image building)
 - [skaffold](https://skaffold.dev/)
-- [kaniko](https://github.com/GoogleContainerTools/kaniko)
-- [tekton](https://tekton.dev/)
-- [argocd](https://argo-cd.readthedocs.io/en/stable/)
-- [fluxcd](https://fluxcd.io/)
 
 ## Example Apps
 
