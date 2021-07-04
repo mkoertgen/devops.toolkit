@@ -1,0 +1,9 @@
+apiVersion: skaffold/v2beta17
+kind: Config
+metadata:
+  name: go-kubebuilder-guestbook
+build:
+  artifacts:
+    - image: go-kubebuilder-guestbook
+      docker:
+        dockerfile: Dockerfile
