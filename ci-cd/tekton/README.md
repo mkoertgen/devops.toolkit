@@ -142,15 +142,17 @@ and hit [http://tekton-dashboard.127.0.0.1.nip.io/](http://tekton-dashboard.127.
 
 ## Docker Registry
 
-When building images with tekton & kaniko we will need a registry, e.g.
+When building images we need a registry to push to, e.g.
 
-- RedHat's Project [Quay](https://github.com/quay/quay-operator) (requires OpenShift)
 - [twuni/docker-registry](https://artifacthub.io/packages/helm/twuni/docker-registry) (ArtifactHub), [twuni/docker-registry.helm](https://github.com/twuni/docker-registry.helm) (GitHub)
+- [harbor](https://artifacthub.io/packages/helm/harbor/harbor)
+- RedHat's Project [Quay](https://github.com/quay/quay-operator) (requires OpenShift)
 - MiniKube: [minikube addons enable registry](https://minikube.sigs.k8s.io/docs/handbook/registry/)
 - MicroK8s: [microk8s enable registry](https://microk8s.io/docs/registry-built-in)
 
+### Plain Docker Registry
+
 ```shell
-# https://operatorhub.io/operator/project-quay
 $ helm repo add twuni https://helm.twun.io
 "twuni" has been added to your repositories
 
@@ -164,3 +166,18 @@ $ helm upgrade --install --wait --create-namespace --namespace tools my-docker-r
 ```
 
 And hit the registry at [http://registry.127.0.0.1.nip.io/](http://registry.127.0.0.1.nip.io/).
+
+### Harbor
+
+```shell
+helm repo add harbor https://helm.goharbor.io
+helm  upgrade --install --wait --create-namespace --namespace tools my-harbor harbor/harbor --version 1.7.0  -f ./charts/harbor/values.yaml
+```
+
+And hit harbor at [harbor-core.127.0.0.1.nip.io](https://harbor-core.127.0.0.1.nip.io/) (`admin/Harbor12345`).
+
+To push an image
+
+```shell
+docker login harbor-core.127.0.0.1.nip.io -u harbor_registry_user -p harbor_registry_password
+```

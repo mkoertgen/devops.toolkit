@@ -1,0 +1,10 @@
+# harbor configuration
+# - reference values: https://github.com/goharbor/harbor-helm/blob/master/values.yaml
+# - harbor with nginx-ingress: https://github.com/goharbor/harbor/issues/13883#issuecomment-754223743
+expose:
+  type: ingress
+  ingress:
+    hosts:
+      core: harbor-core.127.0.0.1.nip.io
+      notary: harbor-notary.127.0.0.1.nip.io
+externalURL: https://harbor-core.127.0.0.1.nip.io
