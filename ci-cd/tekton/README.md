@@ -165,7 +165,7 @@ Update Complete. ⎈Happy Helming!⎈
 $ helm upgrade --install --wait --create-namespace --namespace tools my-docker-registry twuni/docker-registry -f ./charts/docker-registry/values.yaml
 ```
 
-And hit the registry at [http://registry.127.0.0.1.nip.io/](http://registry.127.0.0.1.nip.io/).
+And check repositories at [http://registry.127.0.0.1.nip.io/v2/\_catalog](http://registry.127.0.0.1.nip.io/v2/_catalog).
 
 ### Harbor
 
