@@ -124,10 +124,15 @@ Register an OAuth Application (e.g. as [GitHub Developer App](https://github.com
 Next, install oauth2-proxy using `CLIENT_ID / CLIENT_SECRET`
 
 ```shell
+# For federated Connectors use dex: https://artifacthub.io/packages/helm/dex/dex
+#helm repo add dex https://charts.dexidp.io
+#helm repo update
+helm upgrade --install --wait --create-namespace --namespace tools dex dex/dex -f charts/dex.values.yaml
+
 # Updated helm repo: https://artifacthub.io/packages/helm/oauth2-proxy/oauth2-proxy
 #helm repo add oauth2-proxy https://oauth2-proxy.github.io/manifests
 #helm repo update
-helm upgrade --install --wait --create-namespace --namespace tools oauth2-proxy oauth2-proxy/oauth2-proxy -f charts/oauth2-proxy/values.yaml
+helm upgrade --install --wait --create-namespace --namespace tools oauth2-proxy oauth2-proxy/oauth2-proxy -f charts/oauth2-proxy.values.yaml
 ```
 
 Add Ingress rule for the Tekton Dashboard
@@ -162,7 +167,7 @@ Hang tight while we grab the latest from your chart repositories...
 ...
 Update Complete. ⎈Happy Helming!⎈
 
-$ helm upgrade --install --wait --create-namespace --namespace tools my-docker-registry twuni/docker-registry -f ./charts/docker-registry/values.yaml
+$ helm upgrade --install --wait --create-namespace --namespace tools my-docker-registry twuni/docker-registry -f ./charts/docker-registry.values.yaml
 ```
 
 And check repositories at [http://registry.127.0.0.1.nip.io/v2/\_catalog](http://registry.127.0.0.1.nip.io/v2/_catalog).
@@ -171,7 +176,7 @@ And check repositories at [http://registry.127.0.0.1.nip.io/v2/\_catalog](http:/
 
 ```shell
 helm repo add harbor https://helm.goharbor.io
-helm  upgrade --install --wait --create-namespace --namespace tools my-harbor harbor/harbor --version 1.7.0  -f ./charts/harbor/values.yaml
+helm  upgrade --install --wait --create-namespace --namespace tools my-harbor harbor/harbor --version 1.7.0  -f ./charts/harbor.values.yaml
 ```
 
 And hit harbor at [harbor-core.127.0.0.1.nip.io](https://harbor-core.127.0.0.1.nip.io/) (`admin/Harbor12345`).

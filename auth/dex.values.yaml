@@ -1,0 +1,62 @@
+# https://artifacthub.io/packages/helm/dex/dex#minimal-configuration
+config:
+  # Set it to a valid URL
+  issuer: http://dex.127.0.0.1.nip.io
+  #issuer: http://dex.tools.svc.cluster.local:5556
+
+  # See https://dexidp.io/docs/storage/ for more options
+  storage:
+    type: memory
+
+  # Enable at least one connector
+  # See https://dexidp.io/docs/connectors/ for more options
+  # Disable email login, cf.: https://stackoverflow.com/a/58241149/2592915
+  #enablePasswordDB: false
+  enablePasswordDB: true
+  staticPasswords:
+    - email: "admin@example.com"
+      userID: "08a8684b-db88-4b73-90a9-3cd1661f5466"
+      username: "admin"
+      hash: "$2a$10$2b2cU8CPhOTaGrs1HRQuAueS7JTT5ZHsHSzYiFPm1leZck7Mc8T4W" # "password"
+
+  oauth2:
+    alwaysShowLoginScreen: true
+    skipApprovalScreen: true
+
+  frontend:
+    issuer: My Dex
+    logoURL: https://consileo.io/static/logo-8541d09331ea946c6068fb5bd294d172.svg
+
+  connectors:
+    # TODO: Add real connectors, e.g. Azure AD
+    - type: mockCallback
+      id: mock
+      name: Test-Login
+    #--------
+    - type: microsoft
+      id: microsoft
+      name: Consileo
+      config:
+        clientID: 0688374b-eac0-4d1c-ad2a-d1fdb2098e6e
+        clientSecret: 0.~5XSD0n~xGWk42EKs_.WK9_ovY1uVv93
+        # Cannot work because no TLS possible with nip.io (at least with Let's Encrypt)
+        redirectURI: https://dex.127.0.0.1.nip.io/callback
+        tenant: consileo.onmicrosoft.com
+
+  staticClients:
+    # https://oauth2-proxy.github.io/oauth2-proxy/docs/configuration/oauth_provider/#dex
+    - id: "oauth2-proxy"
+      secret: "proxy"
+      name: "oauth2-proxy"
+      redirectURIs:
+        - "http://auth.127.0.0.1.nip.io/oauth2/callback"
+
+#----------
+ingress:
+  enabled: true
+
+  hosts:
+    - host: dex.127.0.0.1.nip.io
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
