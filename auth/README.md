@@ -12,7 +12,7 @@ Next, install `oauth2-proxy`
 helm repo add oauth2-proxy https://oauth2-proxy.github.io/manifests
 helm repo update
 
-helm upgrade --install --wait --create-namespace --namespace tools oauth2-proxy oauth2-proxy/oauth2-proxy -f oauth2-proxy.values.yaml
+helm upgrade -i --wait --create-namespace -n tools oauth2-proxy oauth2-proxy/oauth2-proxy -f oauth2-proxy.values.yaml
 ```
 
 ## Multiple Connectors using Dex
@@ -25,8 +25,8 @@ To support multiple connectors as a true Single-Sign-On solution with your Kuber
 helm repo add dex https://charts.dexidp.io
 helm repo update
 
-helm upgrade --install --wait --namespace tools dex dex/dex -f dex.values.yaml
+helm upgrade -i --wait -n tools dex dex/dex -f dex.values.yaml
 
 # Adjust oauth2-proxy values to use Dex as OIDC connector and upgrade
-helm upgrade --install --wait tools oauth2-proxy oauth2-proxy/oauth2-proxy -f oauth2-proxy.values.yaml
+helm upgrade -i --wait tools oauth2-proxy oauth2-proxy/oauth2-proxy -f oauth2-proxy.values.yaml
 ```

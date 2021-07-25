@@ -1,0 +1,88 @@
+---
+# https://www.elastic.co/guide/en/cloud-on-k8s/1.6/k8s-deploy-elasticsearch.html#k8s-deploy-elasticsearch
+apiVersion: elasticsearch.k8s.elastic.co/v1
+kind: Elasticsearch
+metadata:
+  name: quickstart
+spec:
+  version: 7.13.4
+  nodeSets:
+    - name: default
+      count: 1
+      config:
+        node.store.allow_mmap: false
+  # Disable TLS for now, cf.: https://www.elastic.co/guide/en/cloud-on-k8s/current/k8s-tls-certificates.html#k8s-disable-tls
+  http:
+    tls:
+      selfSignedCertificate:
+        disabled: true
+  # Add monitoring users
+  auth:
+    fileRealm:
+      - secretName: eck-monitoring-secret
+    roles:
+      - secretName: eck-monitoring-secret
+---
+# https://www.elastic.co/guide/en/cloud-on-k8s/1.6/k8s-deploy-kibana.html#k8s-deploy-kibana
+apiVersion: kibana.k8s.elastic.co/v1
+kind: Kibana
+metadata:
+  name: quickstart
+spec:
+  version: 7.13.4
+  count: 1
+  elasticsearchRef:
+    name: quickstart
+  # https://www.elastic.co/guide/en/cloud-on-k8s/1.6/k8s-kibana-http-configuration.html#k8s-kibana-http-disable-tls
+  http:
+    tls:
+      selfSignedCertificate:
+        disabled: true
+---
+# Add ingress for kibana
+# Kibana ingress rule for nginx load balancer (templated)
+# - https://kubernetes.io/docs/concepts/services-networking/ingress/#the-ingress-resource
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: quickstart-kb
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+    - host: logs.127.0.0.1.nip.io
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: quickstart-kb-http
+                port:
+                  number: 5601
+---
+kind: Secret
+apiVersion: v1
+metadata:
+  name: eck-monitoring-secret
+stringData:
+  # _fluent/fluent
+  # _prometheus/prometheus
+  users: |-
+    _fluent:$2a$10$ZjoGmGMWeaKs9VQSRIQhRusbBb2g8tnsEAIKp./rvwQyzeDeZI2X2
+    _prometheus:$2a$10$Va3W4RfpE5hCSAAEi23DH.a5HGiaIfBnkELcZ7gl24EKNQZwwh15u
+  users_roles: |-
+    prometheus-exporter:_prometheus
+    fluent-importer:_fluent
+  roles.yml: |-
+    fluent-importer:
+      cluster: ['monitor']
+      indices:
+        - names: ['fluent-bit-*']
+          privileges: ['create_index', 'create']
+    prometheus-exporter:
+      cluster: ['monitor', 'monitor_snapshot']
+      indices:
+        - names: ['*']
+          privileges: ['monitor']

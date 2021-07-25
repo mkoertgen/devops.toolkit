@@ -1,0 +1,47 @@
+# https://github.com/fluent/helm-charts/blob/main/charts/fluent-bit/values.yaml
+
+service:
+  annotations:
+    prometheus.io/path: "/api/v1/metrics/prometheus"
+    prometheus.io/port: "2020"
+    prometheus.io/scrape: "true"
+
+serviceMonitor:
+  enabled: true
+
+dashboards:
+  enabled: true
+
+# Make use of a pre-defined configmap instead of the one templated here
+#existingConfigMap: ""
+
+## https://docs.fluentbit.io/manual/administration/configuring-fluent-bit/configuration-file
+config:
+  # - https://github.com/fluent/helm-charts/blob/main/charts/fluent-bit/values.yaml#L172
+  # TODO:
+  ## https://docs.fluentbit.io/manual/pipeline/outputs
+  outputs: |
+    [OUTPUT]
+        Name es
+        Match kube.*
+        Host quickstart-es-http
+        HTTP_User _fluent
+        HTTP_Passwd fluent
+        #HTTP_User elastic
+        #HTTP_Passwd 0ik66FV9Dh56EQcCQ842U1vi
+        Logstash_Format On
+        Logstash_Prefix fluent-bit
+        Suppress_Type_Name On
+        Retry_Limit False
+    [OUTPUT]
+        Name es
+        Match host.*
+        Host quickstart-es-http
+        HTTP_User _fluent
+        HTTP_Passwd fluent
+        #HTTP_User elastic
+        #HTTP_Passwd 0ik66FV9Dh56EQcCQ842U1vi
+        Logstash_Format On
+        Logstash_Prefix fluent-bit
+        Suppress_Type_Name On
+        Retry_Limit False
