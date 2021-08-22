@@ -1,5 +1,19 @@
 # Security
 
+## Sealed Secrets
+
+One approach is [bitnami/sealed-secrets](https://github.com/bitnami-labs/sealed-secrets).
+Here is how to install the [sealed-secrets-operator](https://operatorhub.io/operator/sealed-secrets-operator-helm)
+
+```shell
+kubectl create -f https://operatorhub.io/install/sealed-secrets-operator-helm.yaml
+
+kubectl get csv -n my-sealed-secrets-operator-helm
+
+```
+
+## References
+
 See
 
 - [Automation Assistants: GitOpts Tools in comparison](https://cloudogu.com/en/blog/gitops-tools) (BlogPost 03/17/2021)
