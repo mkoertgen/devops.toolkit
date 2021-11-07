@@ -5,3 +5,8 @@ services:
     image: ${CR_BASE}/myapps/go-kubebuilder-guestbook:${GITVERSION_SEMVER:-latest}
     build:
       context: ./_apps/go/src
+
+  astro:
+    image: ${CR_BASE}/myapps/astro:${GITVERSION_SEMVER:-latest}
+    build:
+      context: ./_apps/astro

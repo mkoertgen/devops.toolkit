@@ -30,7 +30,19 @@ $ curl http://registry.127-0-0-1.nip.io/v2/_catalog
 
 ## Example Apps
 
-Some example apps to build
+Some example apps.
+
+For example, build the [astro](#astro)-app like this using [Docker Compose](https://docs.docker.com/compose/) or [Skaffold](https://skaffold.dev/)
+
+```shell
+# 1. Using docker compose
+docker compose build astro
+docker compose push astro
+
+# 2. Using Skaffold
+cd ./_apps/astro
+skaffold build
+```
 
 ### Go
 
@@ -39,6 +51,10 @@ Using one of
 - [Chi](https://github.com/go-chi/chi), [Echo](https://github.com/labstack/echo), [Twirp](https://github.com/twitchtv/twirp)
 - [Gorm](https://github.com/go-gorm/gorm) (code-first) or [sql-boiler](https://github.com/volatiletech/sqlboiler) (schema-first)
 - ...
+
+### Astro
+
+A static site build using [Astro](https://astro.build/)
 
 ### Rust
 

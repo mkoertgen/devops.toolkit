@@ -167,7 +167,7 @@ Hang tight while we grab the latest from your chart repositories...
 ...
 Update Complete. ⎈Happy Helming!⎈
 
-$ helm upgrade -i --wait --create-namespace -n tools my-docker-registry twuni/docker-registry -f ./charts/docker-registry.values.yaml
+$ helm upgrade -i --wait --create-namespace -n tools docker-registry twuni/docker-registry -f ./charts/docker-registry.values.yaml
 ```
 
 And check repositories at [http://registry.127-0-0-1.nip.io/v2/\_catalog](http://registry.127-0-0-1.nip.io/v2/_catalog).
