@@ -19,9 +19,9 @@ $ kubebuilder create api
 ```shell
 $ skaffold build
 Generating tags...
- - registry.127-0-0-1.nip.io/myapps/go-kubebuilder-guestbook -> registry.127-0-0-1.nip.io/myapps/go-kubebuilder-guestbook:3eefb98-dirty
+ - registry.gitlab.com/mkoertgen/devops-toolkit/apps/go-kubebuilder-guestbook -> registry.gitlab.com/mkoertgen/devops-toolkit/apps/go-kubebuilder-guestbook:ce8da13-dirty
 Checking cache...
- - registry.127-0-0-1.nip.io/myapps/go-kubebuilder-guestbook: Found. Tagging
+ - registry.gitlab.com/mkoertgen/devops-toolkit/apps/go-kubebuilder-guestbook: Found. Tagging
 
 $ docker push registry.127-0-0-1.nip.io/myapps/go-kubebuilder-guestbook:3eefb98-dirty
 The push refers to repository [registry.127-0-0-1.nip.io/myapps/go-kubebuilder-guestbook]

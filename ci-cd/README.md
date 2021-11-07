@@ -10,23 +10,10 @@ Comparing alternative / complementary kubernetes native CI/CD & GitOps approache
 
 ## Adding a Container Registry
 
-For completely local development, the most straight-forward options seems to be to deploy a Docker Registry to your local Kubernetes cluster.
+When building images with tekton & kaniko we will need a (private) registry, e.g.
 
-```shell
-$ helm upgrade -i --wait docker-registry docker-registry \
-  --repo https://helm.twun.io \
-  -n tools tools --create-namespace
-  -f ./tekton/charts/docker-registry.values.yaml
-Release "docker-registry" does not exist. Installing it now.
-...
-NOTES:
-1. Get the application URL by running these commands:
-  http://registry.127-0-0-1.nip.io/
-
-# Check endpoint
-$ curl http://registry.127-0-0-1.nip.io/v2/_catalog
-{"repositories":[]}
-```
+- [GitLab Container Registry](https://docs.gitlab.com/ee/user/packages/container_registry/)
+- [GitHub](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry)
 
 ## Example Apps
 
@@ -42,6 +29,20 @@ docker compose push astro
 # 2. Using Skaffold
 cd ./_apps/astro
 skaffold build
+Generating tags...
+ - registry.gitlab.com/mkoertgen/devops-toolkit/apps/astro -> registry.gitlab.com/mkoertgen/devops-toolkit/apps/astro:ce8da13-dirty
+Checking cache...
+ - registry.gitlab.com/mkoertgen/devops-toolkit/apps/astro: Not found. Building
+Starting build...
+Found [docker-desktop] context, using local docker daemon.
+Building [registry.gitlab.com/mkoertgen/devops-toolkit/apps/astro]...
+...
+Successfully built 76e87e286b4f
+Successfully tagged registry.gitlab.com/mkoertgen/devops-toolkit/apps/astro:ce8da13-dirty
+The push refers to repository [registry.gitlab.com/mkoertgen/devops-toolkit/apps/astro]
+...
+e62ca561a0e1: Pushed
+ce8da13-dirty: digest: sha256:e0736bfb33957e2b378a951e7d76e4d919439e4048b509ebe0f8676b6fe51216 size: 1776
 ```
 
 ### Go

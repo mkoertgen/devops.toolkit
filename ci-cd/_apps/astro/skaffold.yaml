@@ -1,11 +1,14 @@
-apiVersion: skaffold/v2beta17
+apiVersion: skaffold/v2beta25
 kind: Config
 metadata:
   name: astro
 build:
   # tagPolicy:
   #   gitCommit: {}
+  local:
+    push: true
   artifacts:
-    - image: registry.127-0-0-1.nip.io/myapps/astro
+    - image: registry.gitlab.com/mkoertgen/devops-toolkit/apps/astro
       docker:
         dockerfile: Dockerfile
+deploy: {} # TODO

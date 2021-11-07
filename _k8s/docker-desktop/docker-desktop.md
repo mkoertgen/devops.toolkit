@@ -36,5 +36,3 @@ $ curl http://some-host.localhost:80
 </body>
 </html>
 ```
-
-## Container registry

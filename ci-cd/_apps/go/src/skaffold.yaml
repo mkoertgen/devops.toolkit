@@ -3,9 +3,12 @@ kind: Config
 metadata:
   name: go-kubebuilder-guestbook
 build:
+  local:
+    push: true
   # tagPolicy:
   #   gitCommit: {}
   artifacts:
-    - image: registry.127-0-0-1.nip.io/myapps/go-kubebuilder-guestbook # harbor-core.127-0-0-1.nip.io/myapps/go-kubebuilder-guestbook
+    - image: registry.gitlab.com/mkoertgen/devops-toolkit/apps/go-kubebuilder-guestbook
       docker:
         dockerfile: Dockerfile
+deploy: {} # TODO

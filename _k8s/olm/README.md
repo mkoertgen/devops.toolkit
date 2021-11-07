@@ -38,12 +38,10 @@ NAME                          DISPLAY             VERSION    REPLACES   PHASE
 tektoncd-operator.v0.23.0-2   Tektoncd Operator   0.23.0-2              Succeeded
 ```
 
-When building images with tekton & kaniko we will need a registry, e.g.
+When building images with tekton & kaniko we will need a (private) registry, e.g.
 
-- RedHat's Project [Quay](https://github.com/quay/quay-operator) ( requires OpenShift)
-- [twuni/docker-registry](https://artifacthub.io/packages/helm/twuni/docker-registry) (ArtifactHub), [twuni/docker-registry.helm](https://github.com/twuni/docker-registry.helm) (GitHub)
-
-For microk8s just enable the registry addon, otherwise install a registry using an operator, a helm chart or a plain manifest.
+- [GitLab Container Registry](https://docs.gitlab.com/ee/user/packages/container_registry/)
+- [GitHub](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry)
 
 ## Available operators
 
