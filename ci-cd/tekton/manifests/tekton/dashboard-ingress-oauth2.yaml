@@ -5,10 +5,10 @@ metadata:
   namespace: tekton-pipelines
   annotations:
     nginx.ingress.kubernetes.io/auth-url: "http://oauth2-proxy.tools.svc.cluster.local/oauth2/auth"
-    nginx.ingress.kubernetes.io/auth-signin: "http://auth.127.0.0.1.nip.io/oauth2/sign_in?rd=http://$host$request_uri"
+    nginx.ingress.kubernetes.io/auth-signin: "http://auth.127-0-0-1.nip.io/oauth2/sign_in?rd=http://$host$request_uri"
 spec:
   rules:
-    - host: tekton-dashboard.127.0.0.1.nip.io
+    - host: tekton-dashboard.127-0-0-1.nip.io
       http:
         paths:
           - pathType: ImplementationSpecific

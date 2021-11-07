@@ -34,7 +34,7 @@ kubectl apply -f manifests/eck-quickstart.yaml -n monitoring
 kubectl -n monitoring get secret quickstart-es-elastic-user -o=jsonpath="{.data.elastic}" | base64 --decode
 ```
 
-Hit Kibana at [http://logs.127.0.0.1.nip.io](http://logs.127.0.0.1.nip.io)
+Hit Kibana at [http://logs.127-0-0-1.nip.io](http://logs.127-0-0-1.nip.io)
 
 ## References
 

@@ -113,7 +113,7 @@ Add ingress rule using [nip.io](https://nip.io)
 kubectl apply -n tekton-pipelines -f manifests/tekton/dashboard-ingress.yaml
 ```
 
-and hit [http://tekton-dashboard.127.0.0.1.nip.io/](http://tekton-dashboard.127.0.0.1.nip.io/)
+and hit [http://tekton-dashboard.127-0-0-1.nip.io/](http://tekton-dashboard.127-0-0-1.nip.io/)
 
 ### Secured Access via Oauth2
 
@@ -141,7 +141,7 @@ Add Ingress rule for the Tekton Dashboard
 kubectl apply -n tekton-pipelines -f ./manifests/tekton/dashboard-ingress-oauth2.yaml
 ```
 
-and hit [http://tekton-dashboard.127.0.0.1.nip.io/](http://tekton-dashboard.127.0.0.1.nip.io/) to be authenticated and logged in.
+and hit [http://tekton-dashboard.127-0-0-1.nip.io/](http://tekton-dashboard.127-0-0-1.nip.io/) to be authenticated and logged in.
 
 **NOTE:** logout url seems quirky to configure. Should be the possible through the deployment but somehow patching does not work.
 
@@ -170,7 +170,7 @@ Update Complete. ⎈Happy Helming!⎈
 $ helm upgrade -i --wait --create-namespace -n tools my-docker-registry twuni/docker-registry -f ./charts/docker-registry.values.yaml
 ```
 
-And check repositories at [http://registry.127.0.0.1.nip.io/v2/\_catalog](http://registry.127.0.0.1.nip.io/v2/_catalog).
+And check repositories at [http://registry.127-0-0-1.nip.io/v2/\_catalog](http://registry.127-0-0-1.nip.io/v2/_catalog).
 
 ### Harbor
 
@@ -179,10 +179,10 @@ helm repo add harbor https://helm.goharbor.io
 helm  upgrade -i --wait --create-namespace -n tools my-harbor harbor/harbor --version 1.7.0  -f ./charts/harbor.values.yaml
 ```
 
-And hit harbor at [harbor-core.127.0.0.1.nip.io](https://harbor-core.127.0.0.1.nip.io/) (`admin/Harbor12345`).
+And hit harbor at [harbor-core.127-0-0-1.nip.io](https://harbor-core.127-0-0-1.nip.io/) (`admin/Harbor12345`).
 
 To push an image
 
 ```shell
-docker login harbor-core.127.0.0.1.nip.io -u harbor_registry_user -p harbor_registry_password
+docker login harbor-core.127-0-0-1.nip.io -u harbor_registry_user -p harbor_registry_password
 ```

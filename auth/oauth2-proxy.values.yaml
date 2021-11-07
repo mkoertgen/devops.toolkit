@@ -28,15 +28,15 @@ extraArgs:
   # Meanwhile we might use dexidp for multiple providers
   # https://oauth2-proxy.github.io/oauth2-proxy/docs/configuration/oauth_provider/#dex
   provider: oidc
-  oidc-issuer-url: http://dex.127.0.0.1.nip.io
+  oidc-issuer-url: http://dex.127-0-0-1.nip.io
   #--- HACK: For local setup using .nip.io -------------------------
   #oidc-issuer-url: http://dex.tools.svc.cluster.local:5556
   #insecure-oidc-skip-issuer-verification: true
   skip-oidc-discovery: true
-  # See http://dex.127.0.0.1.nip.io/.well-known/openid-configuration
-  login-url: http://dex.127.0.0.1.nip.io/auth
-  #redeem-url: http://dex.127.0.0.1.nip.io/token
-  #oidc-jwks-url: http://dex.127.0.0.1.nip.io/keys
+  # See http://dex.127-0-0-1.nip.io/.well-known/openid-configuration
+  login-url: http://dex.127-0-0-1.nip.io/auth
+  #redeem-url: http://dex.127-0-0-1.nip.io/token
+  #oidc-jwks-url: http://dex.127-0-0-1.nip.io/keys
   redeem-url: http://dex.tools.svc.cluster.local:5556/token
   oidc-jwks-url: http://dex.tools.svc.cluster.local:5556/keys
   #-----------------------------------------------------------------
@@ -49,9 +49,9 @@ extraArgs:
   #provider-display-name: Organization
 
   #----------------
-  whitelist-domain: .127.0.0.1.nip.io
-  cookie-domain: .127.0.0.1.nip.io
-  redirect-url: http://auth.127.0.0.1.nip.io/oauth2/callback
+  whitelist-domain: 127-0-0-1.nip.io
+  cookie-domain: 127-0-0-1.nip.io
+  redirect-url: http://auth.127-0-0-1.nip.io/oauth2/callback
   cookie-secure: "false"
   #---
   skip-provider-button: true
@@ -60,4 +60,4 @@ ingress:
   enabled: true
   path: /
   hosts:
-    - auth.127.0.0.1.nip.io
+    - auth.127-0-0-1.nip.io

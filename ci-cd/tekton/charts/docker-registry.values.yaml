@@ -2,8 +2,8 @@
 # - reference values: https://github.com/twuni/docker-registry.helm/blob/main/values.yaml
 ingress:
   enabled: true
-  path: /
   hosts:
-    - registry.127.0.0.1.nip.io
+    - registry.127-0-0-1.nip.io
   annotations:
+    kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/proxy-body-size: "0"

@@ -5,6 +5,6 @@ expose:
   type: ingress
   ingress:
     hosts:
-      core: harbor-core.127.0.0.1.nip.io
-      notary: harbor-notary.127.0.0.1.nip.io
-externalURL: https://harbor-core.127.0.0.1.nip.io
+      core: harbor-core.127-0-0-1.nip.io
+      notary: harbor-notary.127-0-0-1.nip.io
+externalURL: https://harbor-core.127-0-0-1.nip.io

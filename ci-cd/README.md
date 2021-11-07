@@ -8,6 +8,26 @@ Comparing alternative / complementary kubernetes native CI/CD & GitOps approache
 - [kaniko](https://github.com/GoogleContainerTools/kaniko) (k8s native docker image building)
 - [skaffold](https://skaffold.dev/)
 
+## Adding a Container Registry
+
+For completely local development, the most straight-forward options seems to be to deploy a Docker Registry to your local Kubernetes cluster.
+
+```shell
+$ helm upgrade -i --wait docker-registry docker-registry \
+  --repo https://helm.twun.io \
+  -n tools tools --create-namespace
+  -f ./tekton/charts/docker-registry.values.yaml
+Release "docker-registry" does not exist. Installing it now.
+...
+NOTES:
+1. Get the application URL by running these commands:
+  http://registry.127-0-0-1.nip.io/
+
+# Check endpoint
+$ curl http://registry.127-0-0-1.nip.io/v2/_catalog
+{"repositories":[]}
+```
+
 ## Example Apps
 
 Some example apps to build

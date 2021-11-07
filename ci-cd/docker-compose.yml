@@ -1,0 +1,7 @@
+version: "3.7"
+
+services:
+  go-kubebuilder-guestbook:
+    image: ${CR_BASE}/myapps/go-kubebuilder-guestbook:${GITVERSION_SEMVER:-latest}
+    build:
+      context: ./_apps/go/src

@@ -19,12 +19,12 @@ $ kubebuilder create api
 ```shell
 $ skaffold build
 Generating tags...
- - registry.127.0.0.1.nip.io/myapps/go-kubebuilder-guestbook -> registry.127.0.0.1.nip.io/myapps/go-kubebuilder-guestbook:3eefb98-dirty
+ - registry.127-0-0-1.nip.io/myapps/go-kubebuilder-guestbook -> registry.127-0-0-1.nip.io/myapps/go-kubebuilder-guestbook:3eefb98-dirty
 Checking cache...
- - registry.127.0.0.1.nip.io/myapps/go-kubebuilder-guestbook: Found. Tagging
- 
-$ docker push registry.127.0.0.1.nip.io/myapps/go-kubebuilder-guestbook:3eefb98-dirty
-The push refers to repository [registry.127.0.0.1.nip.io/myapps/go-kubebuilder-guestbook]
+ - registry.127-0-0-1.nip.io/myapps/go-kubebuilder-guestbook: Found. Tagging
+
+$ docker push registry.127-0-0-1.nip.io/myapps/go-kubebuilder-guestbook:3eefb98-dirty
+The push refers to repository [registry.127-0-0-1.nip.io/myapps/go-kubebuilder-guestbook]
 388380bc36ee: Layer already exists
 16679402dc20: Layer already exists
 3eefb98-dirty: digest: sha256:38415dcf258cc4f101e7545dd4adb8f36f4de19413a14663cd3d458741f6fd92 size: 739

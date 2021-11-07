@@ -1,7 +1,7 @@
 # https://artifacthub.io/packages/helm/dex/dex#minimal-configuration
 config:
   # Set it to a valid URL
-  issuer: http://dex.127.0.0.1.nip.io
+  issuer: http://dex.127-0-0-1.nip.io
   #issuer: http://dex.tools.svc.cluster.local:5556
 
   # See https://dexidp.io/docs/storage/ for more options
@@ -40,7 +40,7 @@ config:
         clientID: 0688374b-eac0-4d1c-ad2a-d1fdb2098e6e
         clientSecret: 0.~5XSD0n~xGWk42EKs_.WK9_ovY1uVv93
         # Cannot work because no TLS possible with nip.io (at least with Let's Encrypt)
-        redirectURI: https://dex.127.0.0.1.nip.io/callback
+        redirectURI: https://dex.127-0-0-1.nip.io/callback
         tenant: consileo.onmicrosoft.com
 
   staticClients:
@@ -49,14 +49,13 @@ config:
       secret: "proxy"
       name: "oauth2-proxy"
       redirectURIs:
-        - "http://auth.127.0.0.1.nip.io/oauth2/callback"
+        - "http://auth.127-0-0-1.nip.io/oauth2/callback"
 
 #----------
 ingress:
   enabled: true
-
   hosts:
-    - host: dex.127.0.0.1.nip.io
+    - host: dex.127-0-0-1.nip.io
       paths:
         - path: /
           pathType: ImplementationSpecific
