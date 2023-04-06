@@ -7,6 +7,7 @@ Comparing alternative / complementary kubernetes native CI/CD & GitOps approache
 - [fluxcd](https://fluxcd.io/) (GitOps)
 - [kaniko](https://github.com/GoogleContainerTools/kaniko) (k8s native docker image building)
 - [skaffold](https://skaffold.dev/)
+- [tilt.dev](https://tilt.dev/)
 
 ## Adding a Container Registry
 

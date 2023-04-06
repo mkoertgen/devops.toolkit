@@ -1,0 +1,9 @@
+{
+  "conventionalCommits.scopes": [
+    "ai",
+    "auth",
+    "ci-cd",
+    "observability",
+    "security"
+  ]
+}

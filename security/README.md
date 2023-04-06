@@ -16,7 +16,7 @@ kubectl get csv -n my-sealed-secrets-operator-helm
 
 See
 
-- [Automation Assistants: GitOpts Tools in comparison](https://cloudogu.com/en/blog/gitops-tools) (BlogPost 03/17/2021)
+- [Automation Assistants: GitOps Tools in comparison](https://cloudogu.com/en/blog/gitops-tools) (BlogPost 03/17/2021)
 - [Chaosblade-operator]((./chaosblade/README.md): A Chaos Engineering Tool for Cloud-native
 - [litmuschaos/litmus](https://github.com/litmuschaos/litmus) (Cloud-Native Chaos Engineering)
 - Mozilla [SOPS](https://github.com/mozilla/sops): Simple and flexible tool for managing secrets
