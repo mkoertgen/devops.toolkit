@@ -5,7 +5,8 @@ Example for Tilt using the [Tilt Avatars Sample Project](https://github.com/tilt
 ## How to run
 
 ```shell
-# Start local Kind cluster
+# Start local Kind cluster, check for local registry - https://github.com/tilt-dev/kind-local
+export KIND_CLUSTER_NAME=tilt-avatars
 kind create cluster --name tilt-avatars
 
 # Prepare & start Tilt
