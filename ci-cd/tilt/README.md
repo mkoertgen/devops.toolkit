@@ -8,7 +8,8 @@ Example for Tilt using the [Tilt Avatars Sample Project](https://github.com/tilt
 # Start local Kind cluster
 kind create cluster --name tilt-avatars
 
-# Start Tilt
+# Prepare & start Tilt
+git submodule update --init --recursive
 cd tilt-avatars
 tilt up
 
