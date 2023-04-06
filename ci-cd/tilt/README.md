@@ -11,4 +11,8 @@ kind create cluster --name tilt-avatars
 # Start Tilt
 cd tilt-avatars
 tilt up
+
+# Clean up
+tilt down
+kind delete cluster --name tilt-avatars
 ```
